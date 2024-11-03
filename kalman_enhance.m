@@ -58,7 +58,8 @@ sensor_type = input('Choose sensor type (1 for Linear, 2 for Circular): ');
 
 if sensor_type == 1
     % Linear Sensor Configuration
-    num_sensors = 216; % Number of sensors for linear array
+    % As a user, you can optionally modify num_sensors, sensor_size, and interval.
+num_sensors = 216; % Number of sensors for linear array
     sensor_size = 1; % Size of each sensor in pixels
     interval = 0; % Interval between sensors in pixels
 
@@ -83,6 +84,7 @@ if sensor_type == 1
 
 elseif sensor_type == 2
     % Circular Sensor Configuration
+    % As a user, you can optionally modify num_sensors, sensor_size, and interval.
     sensor_radius = 4.5e-3; % [m]
     num_sensor_points_circular = 216;
 
@@ -238,6 +240,7 @@ NEW_p0_recon=imadjust(NEW_p0_recon);
 
 % original sensor data for Comparison with virtual sensor data
 % with half sensor points
+% Please note that the variable Linear num_sensors has half the initial value for show changes in the code.
 % Sensor Configuration Based on User Input
 if sensor_type == 1
     % Linear Sensor Configuration
@@ -266,6 +269,8 @@ if sensor_type == 1
 
 elseif sensor_type == 2
     % Circular Sensor Configuration
+    % As a user, you can optionally modify num_sensors, sensor_size, and interval.
+    % Please note that the variable num_sensor_points_circular has half the initial value for show changes in the code.
     sensor_radius = 4.5e-3; % [m]
     num_sensor_points_circular = 108;
 
