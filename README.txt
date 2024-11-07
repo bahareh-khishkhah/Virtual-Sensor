@@ -15,8 +15,8 @@ particularly in scenarios with a limited number of physical sensors.
 %% Requirements
 
 To run this code, you will need:
-- **MATLAB**: Ensure you have MATLAB installed on your machine.
-- **k-Wave Toolbox**: This toolbox is essential for simulating photoacoustic imaging. 
+- MATLAB: Ensure you have MATLAB installed on your machine.
+- k-Wave Toolbox: This toolbox is essential for simulating photoacoustic imaging. 
 You can download it from [k-Wave Toolbox](http://www.k-wave.org/).
 
 %%% Code Overview
