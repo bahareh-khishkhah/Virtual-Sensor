@@ -12,7 +12,7 @@ close all
 
 % load the initial pressure distribution from an image and scale
 p0_magnitude = 2;
-p0 = p0_magnitude * loadImage('SAMPLE.bmp');
+p0 = p0_magnitude * loadImage('196.bmp');
 
 % assign the grid size and create the computational grid
 PML_size = 20;              % size of the PML in grid points
@@ -53,15 +53,15 @@ medium.sound_speed = 1500;	% [m/s]
 
 % User input for sensor type selection
 sensor_type = input('Choose sensor type (1 for Linear, 2 for Circular): ');
-
+% User input for number of sensors
+number_sensors = input('Choose number of sensors (note: the number of sensor points should not exceed the number of grid points): ');
 % Sensor Configuration Based on User Input
 
 if sensor_type == 1
     % Linear Sensor Configuration
-    % As a user, you can optionally modify num_sensors, sensor_size, and interval.
-num_sensors = 216; % Number of sensors for linear array
+    num_sensors = number_sensors; % Number of sensors for linear array
     sensor_size = 1; % Size of each sensor in pixels
-    interval = 0; % Interval between sensors in pixels
+    interval = (Nx/num_sensors)-1; % Interval between sensors in pixels
 
     % Initialize mask matrix for linear sensors
     sensor.mask = zeros(kgrid.Nx, kgrid.Ny); 
@@ -84,9 +84,8 @@ num_sensors = 216; % Number of sensors for linear array
 
 elseif sensor_type == 2
     % Circular Sensor Configuration
-    % As a user, you can optionally modify num_sensors, sensor_size, and interval.
     sensor_radius = 4.5e-3; % [m]
-    num_sensor_points_circular = 216;
+    num_sensor_points_circular = number_sensors;
 
     cart_sensor_mask_circular = makeCartCircle(sensor_radius, num_sensor_points_circular, [0, 0], pi);
     
@@ -240,13 +239,12 @@ NEW_p0_recon=imadjust(NEW_p0_recon);
 
 % original sensor data for Comparison with virtual sensor data
 % with half sensor points
-% Please note that the variable Linear num_sensors has half the initial value for show changes in the code.
 % Sensor Configuration Based on User Input
 if sensor_type == 1
     % Linear Sensor Configuration
-    num_sensors = 108; % Number of sensors for linear array
+    num_sensors = number_sensors/2; % Number of sensors for linear array
     sensor_size = 1; % Size of each sensor in pixels
-    interval = 1; % Interval between sensors in pixels
+    interval = (Nx/num_sensors)-1; % Interval between sensors in pixels
 
     % Initialize mask matrix for linear sensors
     sensor.mask = zeros(kgrid.Nx, kgrid.Ny); 
@@ -269,10 +267,8 @@ if sensor_type == 1
 
 elseif sensor_type == 2
     % Circular Sensor Configuration
-    % As a user, you can optionally modify num_sensors, sensor_size, and interval.
-    % Please note that the variable num_sensor_points_circular has half the initial value for show changes in the code.
     sensor_radius = 4.5e-3; % [m]
-    num_sensor_points_circular = 108;
+    num_sensor_points_circular = number_sensors/2;
 
     cart_sensor_mask_circular = makeCartCircle(sensor_radius, num_sensor_points_circular, [0, 0], pi);
     
